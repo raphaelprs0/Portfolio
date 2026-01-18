@@ -1,0 +1,111 @@
+/* --- Variables & Reset --- */
+:root {
+    --primary: #7c3aed;       /* Touche de couleur (Violet) ou change pour Rouge (#ef4444) si tu préfères style "Racing" */
+    --black: #000000;         /* Noir Pur */
+    --dark-gray: #111111;     /* Gris très sombre pour les cartes */
+    --light-gray: #1f1f1f;    /* Bordures */
+    --text-main: #ffffff;
+    --text-muted: #a3a3a3;
+    --radius: 8px;            /* Angles un peu plus carrés pour un look plus "tech/auto" */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--black);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+/* --- Navigation (Mise à jour Centrée) --- */
+header {
+    padding: 30px 0; /* Un peu plus d'espace en haut et en bas */
+    border-bottom: 1px solid var(--light-gray);
+    background: rgba(0,0,0,0.9); /* Fond un peu plus opaque */
+    backdrop-filter: blur(10px);
+    position: sticky; 
+    top: 0; 
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    flex-direction: column; /* C'est la clé : empile le logo au-dessus du menu */
+    align-items: center;    /* Centre tout horizontalement */
+    gap: 20px;              /* Espace entre le logo et les liens */
+}
+
+/* On grossit un peu le logo car il est maintenant la star au centre */
+.logo { 
+    font-size: 2.2rem; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+}
+.logo span { color: var(--primary); }
+
+/* Les liens restent en ligne, mais on peut ajuster l'espacement */
+.nav-links { 
+    display: flex; 
+    gap: 40px; /* Plus d'espace entre les liens pour aérer */
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links a:hover, .nav-links a.active { 
+    color: var(--primary); 
+}
+/* --- Cartes Générales --- */
+.card {
+    background: var(--dark-gray);
+    border: 1px solid var(--light-gray);
+    padding: 20px;
+    border-radius: var(--radius);
+    transition: 0.3s;
+}
+.card:hover { border-color: var(--primary); transform: translateY(-5px); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+
+/* --- Lecteur Audio Custom --- */
+.audio-player {
+    width: 100%;
+    margin-top: 15px;
+}
+/* On style la balise audio native pour qu'elle s'intègre au noir */
+audio {
+    width: 100%;
+    height: 40px;
+    filter: invert(1) hue-rotate(180deg); /* Astuce pour rendre le lecteur natif sombre */
+    border-radius: 50px;
+}
+
+/* --- Typo --- */
+h1 { font-size: 3rem; margin-bottom: 20px; line-height: 1.1; }
+h2 { font-size: 2rem; margin-bottom: 20px; border-left: 4px solid var(--primary); padding-left: 15px; }
+.highlight { color: var(--primary); }
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+    .logo { font-size: 1.8rem; }
+    
+    /* Sur mobile, on peut vouloir réduire l'espace */
+    nav { gap: 10px; }
+    
+    /* Si tu veux que les liens s'empilent aussi sur mobile */
+    .nav-links {
+        gap: 20px;
+        flex-wrap: wrap; /* Permet aux liens de passer à la ligne si l'écran est trop petit */
+        justify-content: center;
+    }
+}
