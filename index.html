@@ -1,36 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raphaël | Home</title>
+    <title>Raphaël-Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <a href="index.html" class="logo">Raphaël<span> Prs</span></a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="about.html">About & Passions</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main class="container" style="height: 80vh; display: flex; align-items: center;">
-        <div>
-            <h1>Code, Engines <br>& <span class="highlight">Performance.</span></h1>
-            <p style="color: var(--text-muted); max-width: 600px; margin-bottom: 30px;">
-                Web Developer obsessed with optimization, whether it's in an algorithm or on a racetrack. 
-                Welcome to my universe.
-            </p>
-            <div style="display: flex; gap: 15px;">
-                <a href="portfolio.html" class="card" style="padding: 12px 30px; border-color: var(--primary); background: var(--primary); color: white;">View My Work</a>
-                <a href="about.html" class="card" style="padding: 12px 30px;">My Passions</a>
+    <main class="content-wrapper">
+        
+        <section id="home" class="tab-content active">
+            <div class="container hero-container">
+                <h1>Hey, I'm Raphaël<br><span class="highlight">Welcome to my Portfolio</span></h1>
+                <p class="hero-text">
+                   I’m a computer science student based in Paris, passionate about technology, security and building efficient digital solutions
+                </p>
+                <button onclick="switchTab('projects')" class="btn-primary">View my projects</button>
+            </div>
+        </section>
+
+        <section id="projects" class="tab-content">
+            <div class="container">
+                <h2>Recents Projects</h2>
+                <div class="grid">
+                    <article class="card">
+                        <h3>Laying Grass Game</h3>
+                        <p>High-performance game engine with optimized inventory system and real-time resource tracking.</p>
+                        <div class="tags"><span>C++</span></div>
+                    </article>
+                    <article class="card">
+                        <h3>SEO Website</h3>
+                        <p>Comprehensive SEO Website with keyword analysis, site audit, and Google référencement integration.</p>
+                        <div class="tags"><span>HTML</span><span>CSS</span><span>SEO</span></div>
+                    </article>
+                    <article class="card">
+                        <h3>Internet Movies DataBase</h3>
+                        <p>Movie discovery platform with real-time analytics, advanced filtering, and comprehensive database search capabilities.</p>
+                        <div class="tags"><span>PHP</span><span>SQL</span></div>
+                    </article>
+                    <article class="card">
+                        <h3>SupRailRoad App</h3>
+                        <p>Modern transportation app design with intuitive interface, real-time booking system, and seamless user experience.</p>
+                        <div class="tags"><span>Figma</span><span>UI</span><span>UX</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="tab-content">
+            <div class="container">
+                <h2>About Me</h2>
+                <p style="max-width: 700px; margin: 0 auto 30px auto; text-align: center;">
+                    I’m a computer science student based in Paris with a strong interest in development, networking, cybersecurity and data. I enjoy understanding how systems work. Outside of tech, I’m passionate about cars, sports and new technologies. I like learning continuously, experimenting with tools and working on real-world projects.
+                </p>
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <a href="assets/cv-raphael.pdf" target="_blank" class="btn btn-primary">Download my CV</a>
+                </div>
+                <div class="grid">
+                    <article class="card">
+                        <h3>Motorsports</h3>
+                        <p>Passionate about precision mechanics (F1, WEC).</p>
+                    </article>
+                    <article class="card">
+                        <h3>Tech & Hardware</h3>
+                        <p>Hardware optimization and streamlined setups.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="music" class="tab-content">
+            <div class="container">
+                <h2>My Playlist</h2>
+                <div id="music-grid" class="music-grid">
+                    <article class="music-card" data-track="0">
+                        <div class="music-cover">
+                            <img src="assets/images/Drake-cover.jpg" alt="Don't Matter To Me Cover">
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-info">
+                            <h3>Don't Matter To Me</h3>
+                            <p>Drake feat. Michael Jackson</p>
+                        </div>
+                        <audio data-index="0">
+                            <source src="assets/audio/Don't Matter To Me.mp3" type="audio/mpeg">
+                        </audio>
+                    </article>
+                    <article class="music-card" data-track="1">
+                        <div class="music-cover">
+                            <img src="assets/images/Sade-cover.jpg" alt="Is It a Crime Cover">
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-info">
+                            <h3>Is It a Crime</h3>
+                            <p>Sade</p>
+                        </div>
+                        <audio data-index="1">
+                            <source src="assets/audio/Is It a Crime.mp3" type="audio/mpeg">
+                        </audio>
+                    </article>
+                    <article class="music-card" data-track="2">
+                        <div class="music-cover">
+                            <img src="assets/images/Booba-cover.jpeg" alt="Ridin' Cover">
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-info">
+                            <h3>Ridin'</h3>
+                            <p>Booba</p>
+                        </div>
+                        <audio data-index="2">
+                            <source src="assets/audio/Ridin'.mp3" type="audio/mpeg">
+                        </audio>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="tab-content">
+            <div class="container">
+                <h2>Contact Me</h2>
+                <form class="contact-form">
+                    <div class="form-group"><input type="text" placeholder="Name" required></div>
+                    <div class="form-group"><input type="email" placeholder="Email" required></div>
+                    <div class="form-group"><textarea rows="5" placeholder="Message" required></textarea></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send</button>
+                </form>
+                
+                <div class="social-grid">
+                    <a href="https://linkedin.com/in/raphaël-pires" target="_blank" class="social-card">
+                        <div class="social-icon"> <img src="assets/icons/linkedin.webp" alt="LinkedIn"></div>
+                        <div class="social-info">
+                            <h4>LinkedIn</h4>
+                        </div>
+                    </a>
+                    <a href="https://github.com/raphaelprs0" target="_blank" class="social-card">
+                        <div class="social-icon"> <img src="assets/icons/github.webp" alt="GitHub"></div>
+                        <div class="social-info">
+                            <h4>GitHub</h4>
+                        </div>
+                    </a>
+                    <a href="https://instagram.com/raphaelprs" target="_blank" class="social-card">
+                        <div class="social-icon"> <img src="assets/icons/instagram.webp" alt="Instagram"></div>
+                        <div class="social-info">
+                            <h4>Instagram</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mini Player Popup -->
+    <div id="mini-player" class="mini-player hidden">
+        <div class="mini-player-cover">
+            <img id="mini-cover" src="" alt="Cover">
+        </div>
+        <div class="mini-player-content">
+            <div class="mini-player-info">
+                <span id="mini-title">Aucune musique</span>
+                <span id="mini-artist"></span>
+            </div>
+            <div class="mini-player-progress">
+                <span id="current-time">0:00</span>
+                <input type="range" id="progress-slider" class="progress-slider" min="0" max="100" value="0">
+                <span id="duration-time">0:00</span>
             </div>
         </div>
-    </main>
+        <div class="mini-player-controls">
+            <button id="mini-prev" class="mini-btn">⏮</button>
+            <button id="mini-play" class="mini-btn mini-btn-main">▶</button>
+            <button id="mini-next" class="mini-btn">⏭</button>
+        </div>
+        <button id="mini-close" class="mini-close">✕</button>
+    </div>
+
+    <!-- Navigation fixe en bas -->
+    <nav class="bottom-nav">
+        <div class="pill-nav">
+            <div class="nav-glider"></div>
+            <a href="#home" class="nav-item active" data-target="home">Home</a>
+            <a href="#projects" class="nav-item" data-target="projects">Projects</a>
+            <a href="#about" class="nav-item" data-target="about">About</a>
+            <a href="#music" class="nav-item" data-target="music">Music</a>
+            <a href="#contact" class="nav-item" data-target="contact">Contact</a>
+        </div>
+    </nav>
 </body>
 </html>
