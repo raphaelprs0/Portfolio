@@ -257,3 +257,47 @@ window.switchTab = function(targetId) {
         targetLink.click();
     }
 };
+// GESTION DU FORMULAIRE CONTACT (AJOUT)
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Empêche le rechargement de la page
+        
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Envoi en cours...';
+        submitBtn.disabled = true;
+
+        // Récupération des données
+        const formData = new FormData(contactForm);
+        const data = {
+            name: formData.get('name'), // Assure-toi que ton input a name="name" (pas "nom")
+            email: formData.get('email'),
+            message: formData.get('message')
+        };
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                alert('Message envoyé avec succès !');
+                contactForm.reset();
+            } else {
+                alert('Erreur lors de l\'envoi. Réessayez.');
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert('Une erreur est survenue.');
+        } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+}
