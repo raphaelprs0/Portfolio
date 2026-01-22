@@ -617,10 +617,17 @@ input, textarea { width: 100%; background: var(--bg-card); border: 1px solid var
 }
 
 .project-modal-images img {
-    flex: 1;
     width: 100%;
-    height: auto;
+    max-height: 400px;
     object-fit: cover;
+}
+
+.project-modal-images img:only-child {
+    flex: none;
+}
+
+.project-modal-images img + img {
+    flex: 1;
 }
 
 .project-modal-body {
