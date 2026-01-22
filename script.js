@@ -68,9 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Données des pistes
     const tracks = [
-        { title: "Don't Matter To Me", artist: "Drake feat. Michael Jackson", cover: "assets/images/Drake-cover.jpg" },
-        { title: "Is It a Crime", artist: "Sade", cover: "assets/images/Sade-cover.jpg" },
-        { title: "Ridin'", artist: "Booba", cover: "assets/images/Booba-cover.jpeg" }
+        { title: "Girls Want Girls", artist: "Drake feat. Lil Baby", cover: "assets/images/Cover/CLB.webp" },
+        { title: "Dumbo", artist: "Travis Scott", cover: "assets/images/Cover/Jackboys.webp" },
+        { title: "Joli", artist: "Zed", cover: "assets/images/Cover/Joli.webp" },
+        { title: "Broski", artist: "Timar", cover: "assets/images/Cover/Broski.webp" }
+        
     ];
 
     // Pause tous les audios sauf celui en cours et reset au début
@@ -301,3 +303,73 @@ if (contactForm) {
         }
     });
 }
+
+// === PROJECT MODAL ===
+const projectCards = document.querySelectorAll('.project-card');
+const projectModal = document.getElementById('project-modal');
+const modalOverlay = document.querySelector('.project-modal-overlay');
+const modalClose = document.querySelector('.project-modal-close');
+const modalImage = document.getElementById('modal-image');
+const modalImage2 = document.getElementById('modal-image2');
+const modalTitle = document.getElementById('modal-title');
+const modalDescription = document.getElementById('modal-description');
+const modalTags = document.getElementById('modal-tags');
+const modalLink = document.getElementById('modal-link');
+
+function openProjectModal(card) {
+    const title = card.dataset.title;
+    const description = card.dataset.description;
+    const tags = card.dataset.tags.split(',');
+    const image = card.dataset.image;
+    const image2 = card.dataset.image2;
+    const link = card.dataset.link;
+
+    modalTitle.textContent = title;
+    modalDescription.textContent = description;
+    modalImage.src = image;
+    
+    // Handle second image
+    if (image2) {
+        modalImage2.src = image2;
+        modalImage2.style.display = 'block';
+    } else {
+        modalImage2.style.display = 'none';
+    }
+    
+    // Generate tags
+    modalTags.innerHTML = tags.map(tag => `<span>${tag.trim()}</span>`).join('');
+    
+    // Handle project link
+    if (link && link.trim() !== '') {
+        modalLink.href = link;
+        modalLink.style.display = 'inline-flex';
+    } else {
+        modalLink.style.display = 'none';
+    }
+    
+    projectModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProjectModal() {
+    projectModal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+projectCards.forEach(card => {
+    card.addEventListener('click', () => openProjectModal(card));
+});
+
+if (modalOverlay) {
+    modalOverlay.addEventListener('click', closeProjectModal);
+}
+
+if (modalClose) {
+    modalClose.addEventListener('click', closeProjectModal);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+        closeProjectModal();
+    }
+});

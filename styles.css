@@ -4,7 +4,7 @@
     --bg-card: #121212;
     --bg-nav: rgba(30, 30, 30, 0.6); /* Fond de la barre gris foncé translucide */
     --bg-pill: #3a3a3c;             /* La "pilule" active */
-    --primary: #ffaa00;
+    --primary: #ffc248;
     --text-main: #ffffff;
     --text-muted: #86868b;
     --border: rgba(255, 255, 255, 0.1);
@@ -48,7 +48,7 @@ body {
     position: relative;
     z-index: 2;
     text-decoration: none;
-    color: var(--text-muted);
+    color: white;
     font-size: 1rem;
     font-weight: 500;
     padding: 14px 24px;
@@ -59,11 +59,11 @@ body {
 }
 
 .nav-item.active {
-    color: #fff;
+    color: var(--primary);
 }
 
 .nav-item:hover {
-    color: #fff;
+    color: var(--primary);
 }
 
 /* Le fond animé (la pilule sombre) */
@@ -129,6 +129,40 @@ p { color: var(--text-muted); line-height: 1.6;}
 .tags { margin-top: 15px; display: flex; gap: 8px; }
 .tags span { font-size: 0.75rem; border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; color: var(--text-muted); }
 
+/* Project cards: images edge-to-edge */
+#projects .card {
+    padding: 0;
+    overflow: hidden;
+}
+
+#projects .card img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+#projects .card h3,
+#projects .card p,
+#projects .card .tags {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#projects .card h3 {
+    padding-top: 20px;
+}
+
+#projects .card .tags {
+    padding-bottom: 25px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
 .hero-container {
     display: flex; 
     align-items: center; 
@@ -152,6 +186,7 @@ p { color: var(--text-muted); line-height: 1.6;}
     cursor: pointer;
     transition: transform 0.2s;
     margin-top: 20px;
+    text-decoration: none;
 }
 .btn-primary:hover { transform: scale(1.05); }
 
@@ -503,6 +538,126 @@ input, textarea { width: 100%; background: var(--bg-card); border: 1px solid var
     color: var(--text-main);
 }
 
+/* --- PROJECT MODAL --- */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.project-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.project-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.project-modal-content {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    max-width: 700px;
+    width: calc(100% - 40px);
+    max-height: 85vh;
+    overflow-y: auto;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.project-modal.active .project-modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.project-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.project-modal-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.project-modal-images {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+}
+
+.project-modal-images img {
+    flex: 1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.project-modal-body {
+    padding: 30px;
+}
+
+.project-modal-body h2 {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.project-modal-body p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.project-modal-body .tags {
+    margin-bottom: 25px;
+}
+
+.project-link {
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    width: auto;
+    padding: 12px 30px;
+}
+
+.project-link[style*="inline-flex"] {
+    display: inline-flex !important;
+}
+
+.project-card {
+    cursor: pointer;
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 600px) {
     .pill-nav {
@@ -538,5 +693,17 @@ input, textarea { width: 100%; background: var(--bg-card); border: 1px solid var
     
     .music-grid {
         grid-template-columns: 1fr;
+    }
+
+    .project-modal-content {
+        max-height: 90vh;
+    }
+
+    .project-modal-body {
+        padding: 20px;
+    }
+
+    .project-modal-body h2 {
+        font-size: 1.4rem;
     }
 }

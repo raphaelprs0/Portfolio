@@ -26,22 +26,45 @@
             <div class="container">
                 <h2>Recents Projects</h2>
                 <div class="grid">
-                    <article class="card">
+                    <article class="card project-card" 
+                        data-title="Laying Grass Game"
+                        data-description="High-performance game engine built in C++ featuring an optimized inventory system, real-time resource tracking, and smooth gameplay mechanics. The project showcases advanced memory management and efficient algorithms for game state handling."
+                        data-tags="C++"
+                        data-image="assets/images/Project/laying-grass.webp">
+                        <img src="assets/images/Project/Laying-grass.webp" alt="Laying Grass Game">
                         <h3>Laying Grass Game</h3>
                         <p>High-performance game engine with optimized inventory system and real-time resource tracking.</p>
                         <div class="tags"><span>C++</span></div>
                     </article>
-                    <article class="card">
+                    <article class="card project-card"
+                        data-title="SEO Website"
+                        data-description="A comprehensive SEO-optimized website featuring keyword analysis tools, site audit capabilities, and full Google référencement integration. Built with best practices for search engine visibility and performance optimization."
+                        data-tags="HTML,CSS,SEO"
+                        data-image="assets/images/Project/seo-website.webp"
+                        data-link="https://devparisfreelance.fr">
+                        <img src="assets/images/Project/seo-website.webp" alt="SEO Website">
                         <h3>SEO Website</h3>
                         <p>Comprehensive SEO Website with keyword analysis, site audit, and Google référencement integration.</p>
                         <div class="tags"><span>HTML</span><span>CSS</span><span>SEO</span></div>
                     </article>
-                    <article class="card">
+                    <article class="card project-card"
+                        data-title="Internet Movies DataBase"
+                        data-description="A movie discovery platform built with PHP and SQL, featuring real-time analytics, advanced filtering options, and comprehensive database search capabilities. Users can browse, search, and filter movies with an intuitive interface connected to a robust backend database."
+                        data-tags="PHP,SQL"
+                        data-image="assets/images/Project/imdb.webp">
+                        <img src="assets/images/Project/imdb.webp" alt="Internet Movies DataBase">
                         <h3>Internet Movies DataBase</h3>
                         <p>Movie discovery platform with real-time analytics, advanced filtering, and comprehensive database search capabilities.</p>
                         <div class="tags"><span>PHP</span><span>SQL</span></div>
                     </article>
-                    <article class="card">
+                    <article class="card project-card"
+                        data-title="SupRailRoad App"
+                        data-description="A modern transportation app design created in Figma, featuring an intuitive user interface, real-time booking system, and seamless user experience. The design focuses on accessibility, clean aesthetics, and efficient user flows for train ticket booking."
+                        data-tags="Figma,UI,UX"
+                        data-image="assets/images/Project/suprailroad.webp"
+                        data-image2="assets/images/Project/suprailroad2.webp">
+                        <img src="assets/images/Project/suprailroad.webp" alt="SupRailRoad App">
+                        <img src="assets/images/Project/suprailroad2.webp" alt="SupRailRoad App">
                         <h3>SupRailRoad App</h3>
                         <p>Modern transportation app design with intuitive interface, real-time booking system, and seamless user experience.</p>
                         <div class="tags"><span>Figma</span><span>UI</span><span>UX</span></div>
@@ -78,41 +101,54 @@
                 <div id="music-grid" class="music-grid">
                     <article class="music-card" data-track="0">
                         <div class="music-cover">
-                            <img src="assets/images/Drake-cover.jpg" alt="Don't Matter To Me Cover">
+                            <img src="assets/images/Cover/CLB.webp" alt="Girls Want Girls Cover">
                             <button class="play-btn">▶</button>
                         </div>
                         <div class="music-info">
-                            <h3>Don't Matter To Me</h3>
-                            <p>Drake feat. Michael Jackson</p>
+                            <h3>Girls Want Girls</h3>
+                            <p>Drake feat. Lil Baby</p>
                         </div>
                         <audio data-index="0">
-                            <source src="assets/audio/Don't Matter To Me.mp3" type="audio/mpeg">
+                            <source src="assets/audio/Girls-want-girls.mp3" type="audio/mpeg">
                         </audio>
                     </article>
                     <article class="music-card" data-track="1">
                         <div class="music-cover">
-                            <img src="assets/images/Sade-cover.jpg" alt="Is It a Crime Cover">
+                            <img src="assets/images/Cover/Jackboys.webp" alt="Dumbo Cover">
                             <button class="play-btn">▶</button>
                         </div>
                         <div class="music-info">
-                            <h3>Is It a Crime</h3>
-                            <p>Sade</p>
+                            <h3>Dumbo</h3>
+                            <p>Travis Scott</p>
                         </div>
                         <audio data-index="1">
-                            <source src="assets/audio/Is It a Crime.mp3" type="audio/mpeg">
+                            <source src="assets/audio/Dumbo.mp3" type="audio/mpeg">
                         </audio>
                     </article>
                     <article class="music-card" data-track="2">
                         <div class="music-cover">
-                            <img src="assets/images/Booba-cover.jpeg" alt="Ridin' Cover">
+                            <img src="assets/images/Cover/Joli.webp" alt="Joli Cover">
                             <button class="play-btn">▶</button>
                         </div>
                         <div class="music-info">
-                            <h3>Ridin'</h3>
-                            <p>Booba</p>
+                            <h3>Joli</h3>
+                            <p>Zed</p>
                         </div>
                         <audio data-index="2">
-                            <source src="assets/audio/Ridin'.mp3" type="audio/mpeg">
+                            <source src="assets/audio/Joli.mp3" type="audio/mpeg">
+                        </audio>
+                    </article>
+                     <article class="music-card" data-track="3">
+                        <div class="music-cover">
+                            <img src="assets/images/Cover/Broski.webp" alt="Broski Cover">
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-info">
+                            <h3>Broski</h3>
+                            <p>Timar</p>
+                        </div>
+                        <audio data-index="3">
+                            <source src="assets/audio/Broski.mp3" type="audio/mpeg">
                         </audio>
                     </article>
                 </div>
@@ -160,6 +196,26 @@
 
     </main>
 
+    <!-- Project Modal -->
+    <div id="project-modal" class="project-modal">
+        <div class="project-modal-overlay"></div>
+        <div class="project-modal-content">
+            <button class="project-modal-close">✕</button>
+            <div class="project-modal-images">
+                <img id="modal-image" src="" alt="Project Image">
+                <img id="modal-image2" src="" alt="Project Image 2" style="display: none;">
+            </div>
+            <div class="project-modal-body">
+                <h2 id="modal-title"></h2>
+                <p id="modal-description"></p>
+                <div id="modal-tags" class="tags"></div>
+                <a id="modal-link" href="" target="_blank" class="btn-primary project-link" style="display: none;">
+                    View Project →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Mini Player Popup -->
     <div id="mini-player" class="mini-player hidden">
         <div class="mini-player-cover">
@@ -189,8 +245,8 @@
         <div class="pill-nav">
             <div class="nav-glider"></div>
             <a href="#home" class="nav-item active" data-target="home">Home</a>
-            <a href="#projects" class="nav-item" data-target="projects">Projects</a>
             <a href="#about" class="nav-item" data-target="about">About</a>
+            <a href="#projects" class="nav-item" data-target="projects">Projects</a>
             <a href="#music" class="nav-item" data-target="music">Music</a>
             <a href="#contact" class="nav-item" data-target="contact">Contact</a>
         </div>
