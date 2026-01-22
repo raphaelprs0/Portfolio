@@ -699,6 +699,19 @@ input, textarea { width: 100%; background: var(--bg-card); border: 1px solid var
         max-height: 90vh;
     }
 
+    .project-modal-images {
+        flex-direction: column;
+    }
+
+    .project-modal-images img {
+        flex: none;
+        width: 100%;
+        height: auto;
+        min-height: 200px;
+        max-height: 300px;
+        object-fit: cover;
+    }
+
     .project-modal-body {
         padding: 20px;
     }
