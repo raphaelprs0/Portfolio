@@ -610,24 +610,20 @@ input, textarea { width: 100%; background: var(--bg-card); border: 1px solid var
 
 .project-modal-images {
     width: 100%;
-    display: flex;
-    gap: 10px;
+    display: block;
     overflow: hidden;
     border-radius: 20px 20px 0 0;
 }
 
 .project-modal-images img {
     width: 100%;
-    max-height: 400px;
+    height: auto;
+    display: block;
     object-fit: cover;
 }
 
-.project-modal-images img:only-child {
-    flex: none;
-}
-
-.project-modal-images img + img {
-    flex: 1;
+.project-modal-images img[style*="display: none"] {
+    display: none !important;
 }
 
 .project-modal-body {
