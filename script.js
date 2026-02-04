@@ -1,57 +1,290 @@
+/* ================================================
+   SCRIPT.JS - Portfolio Raphaël
+   ================================================
+   Table of Contents:
+   1. Translations (i18n)
+   2. Translation Functions
+   3. DOM Ready - Main Logic
+      - Language Toggle
+      - Navigation
+      - Music Player
+      - Progress Slider
+      - Contact Form
+      - Project Modal
+      - Passion Modal
+      - Typewriter
+   4. Helper Functions
+   5. TypeWriter Class
+   ================================================ */
+
+// ================================================
+// 1. TRANSLATIONS (i18n)
+// ================================================
+const translations = {
+  en: {
+    // Navigation
+    "nav.home": "Home",
+    "nav.about": "About",
+    "nav.projects": "Projects",
+    "nav.music": "Music",
+    "nav.contact": "Contact",
+    // Home
+    "home.title": "Hey, I'm Raphaël",
+    "home.description": "I'm a computer science student based in Paris, passionate about <strong>technology, Music</strong> and <strong>Motorsports</strong>",
+    "home.cta": "View Projects",
+    // About
+    "about.title": "About Me",
+    "about.journey.title": "My Journey",
+    "about.journey.description": "I'm a computer science student based in Paris with a strong interest in development, networking, cybersecurity and data. <br>I enjoy understanding how systems work. Outside of tech, I'm passionate about cars, sports and new technologies.",
+    "about.journey.degree": "Bachelor in Computer Engineering",
+    "about.journey.school": "SUPINFO Paris • Network & Dev Engineering.",
+    "about.skills.title": "Technical Skills",
+    "about.passions.title": "Some Passions",
+    "about.languages.title": "Languages",
+    "about.languages.french": "French",
+    "about.languages.english": "English",
+    "about.languages.spanish": "Spanish",
+    "about.languages.native": "Native",
+    "about.languages.fluent": "Fluent",
+    "about.languages.intermediate": "Intermediate",
+    "about.cv.label": "Detailed Resume",
+    "about.cv.button": "Download PDF",
+    // Passions
+    "passion.cars.name": "Cars",
+    "passion.cars.title": "Cars / Motorsports",
+    "passion.cars.description": "Passionate about motorsports and cars. I follow Formula 1, Endurance racing (24h of Le Mans), and Rally. The engineering and speed fascinate me.",
+    "passion.music.name": "Music Prod",
+    "passion.music.title": "Music Production",
+    "passion.music.description": "Creating beats on Logic Pro is my creative outlet. I love experimenting with sounds, from hip-hop to house music.",
+    "passion.sports.name": "Sports",
+    "passion.sports.title": "Sports",
+    "passion.sports.description": "Boxing keeps me disciplined and focused, while the gym helps me build strength. Both teach me perseverance and discipline.",
+    "passion.travel.name": "Travel",
+    "passion.travel.title": "Travel",
+    "passion.travel.description": "Exploring new cultures across the world. From Lisbon to Punta Cana, traveling opens my mind and inspires creativity.",
+    "passion.watches.name": "Watches",
+    "passion.watches.title": "Watchmaking",
+    "passion.watches.description": "Fascinated by horology. From Rolex to Audemars Piguet. I'm working on creating my own custom timepieces.",
+    // Projects
+    "projects.title": "Recent Projects",
+    "project.grass.title": "Laying Grass Game",
+    "project.grass.description": "High-performance game engine built in C++ with optimized inventory system and real-time resource tracking.",
+    "project.grass.short": "High-performance game engine with optimized inventory system.",
+    "project.seo.title": "SEO Website",
+    "project.seo.description": "SEO-optimized website with keyword analysis, site audit, and Google referencing integration.",
+    "project.seo.short": "SEO Website with keyword analysis and Google referencing.",
+    "project.imdb.title": "Internet Movies DataBase",
+    "project.imdb.description": "Movie discovery platform with PHP/SQL, real-time analytics and advanced filtering.",
+    "project.imdb.short": "Movie discovery platform with real-time analytics.",
+    "project.rail.title": "SupRailRoad App",
+    "project.rail.description": "Modern transportation app design in Figma with intuitive UI and real-time booking.",
+    "project.rail.short": "Modern transportation app design with intuitive UI.",
+    // Music
+    "music.title": "My Playlist",
+    "music.description": "Music is a huge part of my life. This playlist reflects my vibe — a mix of hip-hop, rap, and chill beats that keep me focused while coding.",
+    // Contact
+    "contact.title": "Contact Me",
+    "contact.name": "Name",
+    "contact.email": "Email",
+    "contact.message": "Message",
+    "contact.send": "Send"
+  },
+  fr: {
+    // Navigation
+    "nav.home": "Accueil",
+    "nav.about": "Profil",
+    "nav.projects": "Projets",
+    "nav.music": "Music",
+    "nav.contact": "Contact",
+    // Home
+    "home.title": "Hey, je suis Raphaël",
+    "home.description": "Je suis étudiant en informatique basé à Paris, passionné par la <strong>technologie, la Musique</strong> et le <strong>Motorsport</strong>",
+    "home.cta": "Voir les Projets",
+    // About
+    "about.title": "À propos",
+    "about.journey.title": "Mon Parcours",
+    "about.journey.description": "Je suis étudiant en informatique basé à Paris avec un fort intérêt pour le développement, les réseaux, la cybersécurité et la data. <br>J'aime comprendre comment fonctionnent les systèmes. En dehors de la tech, je suis passionné par les voitures, le sport et les nouvelles technologies.",
+    "about.journey.degree": "Bachelor en Ingénierie Informatique",
+    "about.journey.school": "SUPINFO Paris • Réseaux & Développement.",
+    "about.skills.title": "Compétences",
+    "about.passions.title": "Passions",
+    "about.languages.title": "Langues",
+    "about.languages.french": "Français",
+    "about.languages.english": "Anglais",
+    "about.languages.spanish": "Espagnol",
+    "about.languages.native": "Natif",
+    "about.languages.fluent": "Courant",
+    "about.languages.intermediate": "Intermédiaire",
+    "about.cv.label": "CV Détaillé",
+    "about.cv.button": "Télécharger",
+    // Passions
+    "passion.cars.name": "Voitures",
+    "passion.cars.title": "Voitures / Motorsport",
+    "passion.cars.description": "Passionné de sport automobile. Je suis la F1, l'Endurance (24h du Mans) et le Rallye. L'ingénierie et la vitesse me fascinent.",
+    "passion.music.name": "Prod",
+    "passion.music.title": "Production Musicale",
+    "passion.music.description": "Créer des beats sur Logic Pro est mon exutoire créatif. J'aime expérimenter les sons, du hip-hop à la house.",
+    "passion.sports.name": "Sports",
+    "passion.sports.title": "Sports",
+    "passion.sports.description": "La boxe me garde discipliné et concentré, la salle m'aide à développer ma force. Les deux m'enseignent la persévérance.",
+    "passion.travel.name": "Voyage",
+    "passion.travel.title": "Voyage",
+    "passion.travel.description": "Explorer de nouvelles cultures. De Lisbonne à Punta Cana, voyager ouvre mon esprit et inspire ma créativité.",
+    "passion.watches.name": "Montres",
+    "passion.watches.title": "Horlogerie",
+    "passion.watches.description": "Fasciné par l'horlogerie. De Rolex à Audemars Piguet. Je travaille sur la création de mes propres montres.",
+    // Projects
+    "projects.title": "Projets Récents",
+    "project.grass.title": "Jeu Laying Grass",
+    "project.grass.description": "Moteur de jeu haute performance en C++ avec système d'inventaire optimisé et suivi des ressources.",
+    "project.grass.short": "Moteur de jeu haute performance avec système d'inventaire.",
+    "project.seo.title": "Site Web SEO",
+    "project.seo.description": "Site web optimisé SEO avec analyse de mots-clés, audit de site et référencement Google.",
+    "project.seo.short": "Site web SEO avec analyse de mots-clés et référencement.",
+    "project.imdb.title": "Base de Données Films",
+    "project.imdb.description": "Plateforme de découverte de films en PHP/SQL avec analyses en temps réel et filtrage avancé.",
+    "project.imdb.short": "Plateforme de films avec analyses en temps réel.",
+    "project.rail.title": "App SupRailRoad",
+    "project.rail.description": "Design d'application de transport sur Figma avec UI intuitive et réservation en temps réel.",
+    "project.rail.short": "Design d'app transport avec UI intuitive.",
+    // Music
+    "music.title": "Ma Playlist",
+    "music.description": "La musique fait partie de ma vie. Cette playlist reflète mon ambiance — un mélange de hip-hop, rap et beats chill qui me gardent concentré.",
+    // Contact
+    "contact.title": "Me Contacter",
+    "contact.name": "Nom",
+    "contact.email": "Email",
+    "contact.message": "Message",
+    "contact.send": "Envoyer"
+  }
+};
+
+// ================================================
+// 2. TRANSLATION FUNCTIONS
+// ================================================
+
+// Get saved language or default to English
+let currentLang = localStorage.getItem("lang") || "en";
+if (!localStorage.getItem("lang")) localStorage.setItem("lang", "en");
+
+// Apply translations to all elements with data-i18n
+function applyTranslations(lang) {
+  const t = translations[lang];
+  
+  // Text content
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (t[key]) el.innerHTML = t[key];
+  });
+  
+  // Placeholders
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (t[key]) el.placeholder = t[key];
+  });
+
+  // Passions
+  document.querySelectorAll(".passion-item").forEach(item => {
+    const key = item.dataset.passion;
+    if (!key) return;
+    const nameEl = item.querySelector(".passion-name");
+    if (nameEl && t[`passion.${key}.name`]) nameEl.textContent = t[`passion.${key}.name`];
+    if (t[`passion.${key}.title`]) item.dataset.title = t[`passion.${key}.title`];
+    if (t[`passion.${key}.description`]) item.dataset.description = t[`passion.${key}.description`];
+  });
+
+  // Projects
+  document.querySelectorAll(".project-card").forEach(item => {
+    const key = item.dataset.project;
+    if (!key) return;
+    const titleEl = item.querySelector("h3");
+    const descEl = item.querySelector("p");
+    if (titleEl && t[`project.${key}.title`]) titleEl.textContent = t[`project.${key}.title`];
+    if (descEl && t[`project.${key}.short`]) descEl.textContent = t[`project.${key}.short`];
+    if (t[`project.${key}.title`]) item.dataset.title = t[`project.${key}.title`];
+    if (t[`project.${key}.description`]) item.dataset.description = t[`project.${key}.description`];
+  });
+
+  // Typewriter
+  const txtElement = document.querySelector(".txt-type");
+  if (txtElement) {
+    const wordsAttr = lang === "fr" ? "data-words-fr" : "data-words-en";
+    const words = txtElement.getAttribute(wordsAttr);
+    if (words) {
+      txtElement.setAttribute("data-words", words);
+      if (window.currentTypeWriter) {
+        window.currentTypeWriter.words = JSON.parse(words);
+        window.currentTypeWriter.txt = "";
+        window.currentTypeWriter.wordIndex = 0;
+        window.currentTypeWriter.isDeleting = false;
+      }
+    }
+  }
+
+  // Update UI
+  const langToggle = document.getElementById("lang-toggle");
+  if (langToggle) langToggle.textContent = lang === "en" ? "FR" : "EN";
+  document.documentElement.lang = lang;
+  localStorage.setItem("lang", lang);
+  currentLang = lang;
+}
+
+// ================================================
+// 3. DOM READY - MAIN LOGIC
+// ================================================
 document.addEventListener("DOMContentLoaded", () => {
+  
+  // Elements
   const navItems = document.querySelectorAll(".nav-item");
   const glider = document.querySelector(".nav-glider");
   const sections = document.querySelectorAll(".tab-content");
   const pillNav = document.querySelector(".pill-nav");
 
-  // === NAVIGATION ===
+  // Apply saved language
+  applyTranslations(currentLang);
+
+  // --- LANGUAGE TOGGLE ---
+  const langToggle = document.getElementById("lang-toggle");
+  if (langToggle) {
+    langToggle.addEventListener("click", () => {
+      applyTranslations(currentLang === "en" ? "fr" : "en");
+    });
+  }
+
+  // --- NAVIGATION ---
   function moveGlider(element) {
     if (!element || !glider || !pillNav) return;
-
-    const padding = 8; // Padding du pill-nav
-    const width = element.offsetWidth;
-    const left = element.offsetLeft;
-
-    glider.style.width = `${width}px`;
-    glider.style.transform = `translateX(${left - padding}px)`;
+    const padding = 8;
+    glider.style.width = `${element.offsetWidth}px`;
+    glider.style.transform = `translateX(${element.offsetLeft - padding}px)`;
     glider.style.opacity = "1";
   }
 
   function switchTab(targetId) {
-    sections.forEach((section) => {
-      section.classList.remove("active");
-    });
-
-    const targetSection = document.getElementById(targetId);
-    if (targetSection) {
-      targetSection.classList.add("active");
+    sections.forEach(s => s.classList.remove("active"));
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.classList.add("active");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
 
-  // Initialisation du glider
-  setTimeout(() => {
-    const activeItem = document.querySelector(".nav-item.active");
-    moveGlider(activeItem);
-  }, 50);
+  // Init glider
+  setTimeout(() => moveGlider(document.querySelector(".nav-item.active")), 50);
 
-  navItems.forEach((item) => {
-    item.addEventListener("click", (e) => {
+  navItems.forEach(item => {
+    item.addEventListener("click", e => {
       e.preventDefault();
-      navItems.forEach((nav) => nav.classList.remove("active"));
+      navItems.forEach(n => n.classList.remove("active"));
       item.classList.add("active");
       moveGlider(item);
-      const target = item.getAttribute("data-target");
-      switchTab(target);
+      switchTab(item.dataset.target);
     });
   });
 
-  window.addEventListener("resize", () => {
-    const currentActive = document.querySelector(".nav-item.active");
-    moveGlider(currentActive);
-  });
+  window.addEventListener("resize", () => moveGlider(document.querySelector(".nav-item.active")));
 
-  // === MUSIC PLAYER ===
+  // --- MUSIC PLAYER ---
   const musicCards = document.querySelectorAll(".music-card");
   const miniPlayer = document.getElementById("mini-player");
   const miniPlayerCollapsed = document.getElementById("mini-player-collapsed");
@@ -68,34 +301,22 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentTrackIndex = -1;
   let isPlaying = false;
   let isMinimized = false;
-  let allAudios = document.querySelectorAll(".music-card audio");
+  const allAudios = document.querySelectorAll(".music-card audio");
 
-  // Données des pistes
+  // Track data
   const tracks = [
-    {
-      title: "Girls Want Girls",
-      artist: "Drake feat. Lil Baby",
-      cover: "assets/images/Cover/CLB.webp",
-    },
-    {
-      title: "Dumbo",
-      artist: "Travis Scott",
-      cover: "assets/images/Cover/Jackboys.webp",
-    },
+    { title: "Girls Want Girls", artist: "Drake feat. Lil Baby", cover: "assets/images/Cover/CLB.webp" },
+    { title: "Dumbo", artist: "Travis Scott", cover: "assets/images/Cover/Jackboys.webp" },
     { title: "Joli", artist: "Zed", cover: "assets/images/Cover/Joli.webp" },
-    {
-      title: "Broski",
-      artist: "Timar",
-      cover: "assets/images/Cover/Broski.webp",
-    },
+    { title: "Broski", artist: "Timar", cover: "assets/images/Cover/Broski.webp" }
   ];
 
-  // Pause tous les audios sauf celui en cours et reset au début
+  // Pause all except current
   function pauseAllExcept(exceptIndex) {
-    allAudios.forEach((audio, index) => {
-      if (index !== exceptIndex) {
+    allAudios.forEach((audio, i) => {
+      if (i !== exceptIndex) {
         audio.pause();
-        audio.currentTime = 0; // Reset au début
+        audio.currentTime = 0;
         const card = audio.closest(".music-card");
         if (card) {
           card.classList.remove("playing");
@@ -105,7 +326,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  // Helper pour mettre à jour les icônes SVG du mini player
+
+  // Update play/pause icons
   function updateMiniPlayerIcon(playing) {
     const playIcon = miniPlayBtn.querySelector(".play-icon");
     const pauseIcon = miniPlayBtn.querySelector(".pause-icon");
@@ -114,10 +336,10 @@ document.addEventListener("DOMContentLoaded", () => {
       pauseIcon.style.display = playing ? "block" : "none";
     }
   }
-  // Jouer une piste
+
+  // Play track
   function playTrack(index) {
     if (index < 0 || index >= allAudios.length) return;
-
     pauseAllExcept(index);
     currentTrackIndex = index;
 
@@ -125,20 +347,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = musicCards[index];
     const track = tracks[index];
 
-    // Mettre à jour le mini player
+    // Update mini player
     miniCover.src = track.cover;
     miniCoverCollapsed.src = track.cover;
     miniTitle.textContent = track.title;
     miniArtist.textContent = track.artist;
 
-    // Afficher le bon player selon l'état
+    // Show player
     if (isMinimized) {
       miniPlayerCollapsed.classList.remove("hidden", "paused");
     } else {
       miniPlayer.classList.remove("hidden");
     }
 
-    // Jouer
     audio.play();
     isPlaying = true;
     card.classList.add("playing");
@@ -147,10 +368,9 @@ document.addEventListener("DOMContentLoaded", () => {
     miniPlayerCollapsed.classList.remove("paused");
   }
 
-  // Pause la piste en cours
+  // Pause current
   function pauseCurrentTrack() {
     if (currentTrackIndex < 0) return;
-
     const audio = allAudios[currentTrackIndex];
     const card = musicCards[currentTrackIndex];
 
@@ -164,32 +384,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Toggle play/pause
   function togglePlay() {
-    if (currentTrackIndex < 0) {
-      playTrack(0);
-      return;
-    }
-
-    if (isPlaying) {
-      pauseCurrentTrack();
-    } else {
-      playTrack(currentTrackIndex);
-    }
+    if (currentTrackIndex < 0) { playTrack(0); return; }
+    isPlaying ? pauseCurrentTrack() : playTrack(currentTrackIndex);
   }
 
-  // Piste suivante
-  function nextTrack() {
-    const nextIndex = (currentTrackIndex + 1) % allAudios.length;
-    playTrack(nextIndex);
-  }
+  // Next/Prev
+  function nextTrack() { playTrack((currentTrackIndex + 1) % allAudios.length); }
+  function prevTrack() { playTrack(currentTrackIndex <= 0 ? allAudios.length - 1 : currentTrackIndex - 1); }
 
-  // Piste précédente
-  function prevTrack() {
-    const prevIndex =
-      currentTrackIndex <= 0 ? allAudios.length - 1 : currentTrackIndex - 1;
-    playTrack(prevIndex);
-  }
-
-  // Fermer le mini player
+  // Close player
   function closeMiniPlayer() {
     pauseCurrentTrack();
     miniPlayer.classList.add("hidden");
@@ -198,46 +401,33 @@ document.addEventListener("DOMContentLoaded", () => {
     currentTrackIndex = -1;
   }
 
-  // Minimiser le player
+  // Minimize/Expand
   function minimizePlayer() {
     miniPlayer.classList.add("hidden");
     miniPlayerCollapsed.classList.remove("hidden");
-    if (!isPlaying) {
-      miniPlayerCollapsed.classList.add("paused");
-    }
+    if (!isPlaying) miniPlayerCollapsed.classList.add("paused");
     isMinimized = true;
   }
 
-  // Agrandir le player
   function expandPlayer() {
     miniPlayerCollapsed.classList.add("hidden");
     miniPlayer.classList.remove("hidden");
     isMinimized = false;
   }
 
-  // Event listeners pour les cartes de musique
-  musicCards.forEach((card, index) => {
+  // Music card events
+  musicCards.forEach((card, i) => {
     const playBtn = card.querySelector(".play-btn");
-
-    playBtn.addEventListener("click", (e) => {
+    playBtn.addEventListener("click", e => {
       e.stopPropagation();
-      if (currentTrackIndex === index && isPlaying) {
-        pauseCurrentTrack();
-      } else {
-        playTrack(index);
-      }
+      currentTrackIndex === i && isPlaying ? pauseCurrentTrack() : playTrack(i);
     });
-
     card.addEventListener("click", () => {
-      if (currentTrackIndex === index && isPlaying) {
-        pauseCurrentTrack();
-      } else {
-        playTrack(index);
-      }
+      currentTrackIndex === i && isPlaying ? pauseCurrentTrack() : playTrack(i);
     });
   });
 
-  // Event listeners pour le mini player
+  // Mini player events
   miniPlayBtn.addEventListener("click", togglePlay);
   miniNextBtn.addEventListener("click", nextTrack);
   miniPrevBtn.addEventListener("click", prevTrack);
@@ -245,12 +435,11 @@ document.addEventListener("DOMContentLoaded", () => {
   miniMinimizeBtn.addEventListener("click", minimizePlayer);
   miniPlayerCollapsed.addEventListener("click", expandPlayer);
 
-  // === SLIDER DE PROGRESSION ===
+  // --- PROGRESS SLIDER ---
   const progressSlider = document.getElementById("progress-slider");
   const currentTimeEl = document.getElementById("current-time");
   const durationTimeEl = document.getElementById("duration-time");
 
-  // Formater le temps en mm:ss
   function formatTime(seconds) {
     if (isNaN(seconds)) return "0:00";
     const mins = Math.floor(seconds / 60);
@@ -258,19 +447,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   }
 
-  // Mettre à jour le slider pendant la lecture
-  allAudios.forEach((audio) => {
+  allAudios.forEach(audio => {
     audio.addEventListener("timeupdate", () => {
-      if (
-        audio === allAudios[currentTrackIndex] &&
-        !progressSlider.dataset.dragging
-      ) {
+      if (audio === allAudios[currentTrackIndex] && !progressSlider.dataset.dragging) {
         const percent = (audio.currentTime / audio.duration) * 100;
         progressSlider.value = percent || 0;
         currentTimeEl.textContent = formatTime(audio.currentTime);
-        // Calculer le temps restant
-        const remaining = audio.duration - audio.currentTime;
-        durationTimeEl.textContent = "-" + formatTime(remaining);
+        durationTimeEl.textContent = "-" + formatTime(audio.duration - audio.currentTime);
       }
     });
 
@@ -280,86 +463,46 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    audio.addEventListener("durationchange", () => {
-      if (audio === allAudios[currentTrackIndex]) {
-        durationTimeEl.textContent = "-" + formatTime(audio.duration);
-      }
-    });
+    audio.addEventListener("ended", nextTrack);
   });
 
-  // Contrôle du slider par l'utilisateur (souris et tactile)
-  progressSlider.addEventListener("input", (e) => {
+  progressSlider.addEventListener("input", () => {
     progressSlider.dataset.dragging = "true";
-    // Mise à jour immédiate du temps affiché pendant le drag
     if (currentTrackIndex >= 0) {
-      const audio = allAudios[currentTrackIndex];
-      const time = (progressSlider.value / 100) * audio.duration;
+      const time = (progressSlider.value / 100) * allAudios[currentTrackIndex].duration;
       currentTimeEl.textContent = formatTime(time);
     }
   });
 
   progressSlider.addEventListener("change", () => {
     if (currentTrackIndex >= 0) {
-      const audio = allAudios[currentTrackIndex];
-      const time = (progressSlider.value / 100) * audio.duration;
-      audio.currentTime = time;
+      allAudios[currentTrackIndex].currentTime = (progressSlider.value / 100) * allAudios[currentTrackIndex].duration;
     }
     delete progressSlider.dataset.dragging;
   });
 
-  // Support tactile amélioré
-  progressSlider.addEventListener(
-    "touchstart",
-    (e) => {
-      progressSlider.dataset.dragging = "true";
-    },
-    { passive: true },
-  );
-
-  progressSlider.addEventListener(
-    "touchend",
-    (e) => {
-      if (currentTrackIndex >= 0) {
-        const audio = allAudios[currentTrackIndex];
-        const time = (progressSlider.value / 100) * audio.duration;
-        audio.currentTime = time;
-      }
-      delete progressSlider.dataset.dragging;
-    },
-    { passive: true },
-  );
-
-  // Quand une piste se termine, passer à la suivante
-  allAudios.forEach((audio) => {
-    audio.addEventListener("ended", nextTrack);
-  });
-
-  // === GESTION DU FORMULAIRE CONTACT ===
+  // --- CONTACT FORM ---
   const contactForm = document.getElementById("contactForm");
   if (contactForm) {
-    contactForm.addEventListener("submit", async (e) => {
+    contactForm.addEventListener("submit", async e => {
       e.preventDefault();
-
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.textContent;
-      submitBtn.textContent = "Envoi en cours...";
+      submitBtn.textContent = "Envoi...";
       submitBtn.disabled = true;
 
       const formData = new FormData(contactForm);
-      const data = {
-        name: formData.get("name"),
-        email: formData.get("email"),
-        message: formData.get("message"),
-      };
-
       try {
         const response = await fetch("/api/contact", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            name: formData.get("name"),
+            email: formData.get("email"),
+            message: formData.get("message")
+          })
         });
-
-        alert(response.ok ? "Message envoyé avec succès !" : "Erreur lors de l'envoi. Réessayez.");
+        alert(response.ok ? "Message envoyé !" : "Erreur lors de l'envoi.");
         if (response.ok) contactForm.reset();
       } catch (error) {
         console.error("Erreur:", error);
@@ -371,11 +514,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === PROJECT MODAL ===
+  // --- PROJECT MODAL ---
   const projectCards = document.querySelectorAll(".project-card");
   const projectModal = document.getElementById("project-modal");
-  const modalOverlay = document.querySelector(".project-modal-overlay");
-  const modalClose = document.querySelector(".project-modal-close");
   const modalImage = document.getElementById("modal-image");
   const modalImage2 = document.getElementById("modal-image2");
   const modalTitle = document.getElementById("modal-title");
@@ -385,18 +526,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openProjectModal(card) {
     const { title, description, tags, image, image2, link } = card.dataset;
-
     modalTitle.textContent = title;
     modalDescription.textContent = description;
     modalImage.src = image;
     modalImage2.src = image2 || "";
     modalImage2.style.display = image2 ? "block" : "none";
-
-    modalTags.innerHTML = tags.split(",").map((tag) => `<span>${tag.trim()}</span>`).join("");
-
+    modalTags.innerHTML = tags.split(",").map(t => `<span>${t.trim()}</span>`).join("");
     modalLink.href = link || "";
-    modalLink.style.display = link && link.trim() ? "inline-flex" : "none";
-
+    modalLink.style.display = link ? "inline-flex" : "none";
     projectModal.classList.add("active");
     document.body.style.overflow = "hidden";
   }
@@ -406,30 +543,64 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "";
   }
 
-  projectCards.forEach((card) => card.addEventListener("click", () => openProjectModal(card)));
-  if (modalOverlay) modalOverlay.addEventListener("click", closeProjectModal);
-  if (modalClose) modalClose.addEventListener("click", closeProjectModal);
+  projectCards.forEach(card => card.addEventListener("click", () => openProjectModal(card)));
+  projectModal.querySelector(".modal-overlay").addEventListener("click", closeProjectModal);
+  projectModal.querySelector(".modal-close").addEventListener("click", closeProjectModal);
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && projectModal.classList.contains("active")) closeProjectModal();
+  // --- PASSION MODAL ---
+  const passionModal = document.getElementById("passion-modal");
+  const passionItems = document.querySelectorAll(".passion-item");
+  const passionImage = document.getElementById("passion-image");
+  const passionTitle = document.getElementById("passion-title");
+  const passionDescription = document.getElementById("passion-description");
+
+  function openPassionModal(item) {
+    passionImage.src = item.dataset.image;
+    passionTitle.textContent = item.dataset.title;
+    passionDescription.textContent = item.dataset.description;
+    passionModal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closePassionModal() {
+    passionModal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  passionItems.forEach(item => item.addEventListener("click", () => openPassionModal(item)));
+  passionModal.querySelector(".modal-overlay").addEventListener("click", closePassionModal);
+  passionModal.querySelector(".modal-close").addEventListener("click", closePassionModal);
+
+  // Close modals on Escape
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      if (projectModal.classList.contains("active")) closeProjectModal();
+      if (passionModal.classList.contains("active")) closePassionModal();
+    }
   });
 
-  // === TYPEWRITER EFFECT ===
+  // --- TYPEWRITER ---
   const txtElement = document.querySelector(".txt-type");
   if (txtElement) {
     const words = JSON.parse(txtElement.getAttribute("data-words"));
     const wait = txtElement.getAttribute("data-wait");
-    new TypeWriter(txtElement, words, wait);
+    window.currentTypeWriter = new TypeWriter(txtElement, words, wait);
   }
 });
 
-// Fonction globale pour le bouton du Hero
-window.switchTab = function (targetId) {
-  const targetLink = document.querySelector(`.nav-item[data-target="${targetId}"]`);
-  if (targetLink) targetLink.click();
+// ================================================
+// 4. HELPER FUNCTIONS
+// ================================================
+
+// Global function for hero button
+window.switchTab = function(targetId) {
+  const link = document.querySelector(`.nav-item[data-target="${targetId}"]`);
+  if (link) link.click();
 };
 
-// === TYPEWRITER CLASS ===
+// ================================================
+// 5. TYPEWRITER CLASS
+// ================================================
 class TypeWriter {
   constructor(txtElement, words, wait = 3000) {
     this.txtElement = txtElement;
