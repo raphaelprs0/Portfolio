@@ -730,6 +730,23 @@ input, textarea {
   .btn-secondary { width: 100%; }
 }
 
+/* ================================================
+   CREDITS FOOTER
+   ================================================ */
+.credits {
+  margin-top: 60px;
+  padding: 20px 0 80px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.credits p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
 @media (max-width: 600px) {
   /* Navigation */
   .bottom-nav { bottom: 20px; left: 0; right: 0; transform: none; padding: 0 15px; width: 100%; display: flex; justify-content: center; }
