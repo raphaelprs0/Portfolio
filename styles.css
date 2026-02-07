@@ -358,9 +358,8 @@ input, textarea {
   border-radius: 8px;
   font-size: 0.85rem;
   font-family: monospace;
-  transition: all 0.2s;
+  
 }
-.tech-tag:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
 
 /* Passions Grid */
 .passions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }

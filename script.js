@@ -52,10 +52,10 @@ const translations = {
     // Passions
     "passion.cars.name": "Cars",
     "passion.cars.title": "Cars / Motorsports",
-    "passion.cars.description": "Passionate about motorsports and cars. I follow Formula 1, Endurance racing (24h of Le Mans), and Rally. The engineering and speed fascinate me.",
+    "passion.cars.description": "Passionate about motorsports and cars. I follow Formula 1, Endurance racing (24h of Le Mans), and Rally. My favourite car brand has been Ferrari since I was little.",
     "passion.music.name": "Music Prod",
     "passion.music.title": "Music Production",
-    "passion.music.description": "Creating beats on Logic Pro is my creative outlet. I love experimenting with sounds, from hip-hop to house music.",
+    "passion.music.description": "Creating Productions on Logic Pro allows me to work on my creative side. I like to experiment with all styles, from hip-hop to house music.",
     "passion.sports.name": "Sports",
     "passion.sports.title": "Sports",
     "passion.sports.description": "Boxing keeps me disciplined and focused, while the gym helps me build strength. Both teach me perseverance and discipline.",
@@ -64,7 +64,7 @@ const translations = {
     "passion.travel.description": "Exploring new cultures across the world. From Lisbon to Punta Cana, traveling opens my mind and inspires creativity.",
     "passion.watches.name": "Watches",
     "passion.watches.title": "Watchmaking",
-    "passion.watches.description": "Fascinated by horology. From Rolex to Audemars Piguet. I'm working on creating my own custom timepieces.",
+    "passion.watches.description": "Fascinated by horology. From Rolex to Jaeger-Lecoultre. I'm working on creating my own custom timepieces.",
     // Projects
     "projects.title": "Recent Projects",
     "project.grass.title": "Laying Grass Game",
@@ -81,7 +81,7 @@ const translations = {
     "project.rail.short": "Modern transportation app design with intuitive UI.",
     // Music
     "music.title": "My Playlist",
-    "music.description": "Music is a huge part of my life. This playlist reflects my vibe — a mix of hip-hop, rap, and chill beats that keep me focused while coding.",
+    "music.description": "Music is a huge part of my life. This playlist reflects my vibe — a mix of hip-hop, rap, and chill songs that keep me focused while coding.",
     // Contact
     "contact.title": "Contact Me",
     "contact.name": "Name",
@@ -97,8 +97,8 @@ const translations = {
     "nav.music": "Music",
     "nav.contact": "Contact",
     // Home
-    "home.title": "Hey, je suis Raphaël",
-    "home.description": "Je suis étudiant en informatique basé à Paris, passionné par la <strong>technologie, la Musique</strong> et le <strong>Motorsport</strong>",
+    "home.title": "Bonjour, je suis Raphaël",
+    "home.description": "Je suis étudiant en informatique basé à Paris, passionné par la <strong>technologie, la Musique</strong> et le <strong>Sport automobile</strong>",
     "home.cta": "Voir les Projets",
     // About
     "about.title": "À propos",
@@ -119,11 +119,11 @@ const translations = {
     "about.cv.button": "Télécharger",
     // Passions
     "passion.cars.name": "Voitures",
-    "passion.cars.title": "Voitures / Motorsport",
-    "passion.cars.description": "Passionné de sport automobile. Je suis la F1, l'Endurance (24h du Mans) et le Rallye. L'ingénierie et la vitesse me fascinent.",
+    "passion.cars.title": "Voitures / Sport automobile",
+    "passion.cars.description": "Passionné  de voitures et de sport automobile. Je suis la F1, l'Endurance (24h du Mans) et le Rallye. Ma marque de voiture préférée est Ferrari depuis petit.",
     "passion.music.name": "Prod",
     "passion.music.title": "Production Musicale",
-    "passion.music.description": "Créer des beats sur Logic Pro est mon exutoire créatif. J'aime expérimenter les sons, du hip-hop à la house.",
+    "passion.music.description": "Créer des Productions sur Logic Pro me permet de travailler mon coté créatif. J'aime expérimenter tous les styles, du hip-hop à la house.",
     "passion.sports.name": "Sports",
     "passion.sports.title": "Sports",
     "passion.sports.description": "La boxe me garde discipliné et concentré, la salle m'aide à développer ma force. Les deux m'enseignent la persévérance.",
@@ -132,12 +132,12 @@ const translations = {
     "passion.travel.description": "Explorer de nouvelles cultures. De Lisbonne à Punta Cana, voyager ouvre mon esprit et inspire ma créativité.",
     "passion.watches.name": "Montres",
     "passion.watches.title": "Horlogerie",
-    "passion.watches.description": "Fasciné par l'horlogerie. De Rolex à Audemars Piguet. Je travaille sur la création de mes propres montres.",
+    "passion.watches.description": "Fasciné par l'horlogerie. De Rolex à Jaeger-Lecoultre. Je travaille également sur la création de mes propres montres.",
     // Projects
     "projects.title": "Projets Récents",
     "project.grass.title": "Jeu Laying Grass",
-    "project.grass.description": "Moteur de jeu haute performance en C++ avec système d'inventaire optimisé et suivi des ressources.",
-    "project.grass.short": "Moteur de jeu haute performance avec système d'inventaire.",
+    "project.grass.description": "Jeu haute performance créer en C++ avec système d'inventaire optimisé et suivi des ressources.",
+    "project.grass.short": "Jeu haute performance avec système d'inventaire.",
     "project.seo.title": "Site Web SEO",
     "project.seo.description": "Site web optimisé SEO avec analyse de mots-clés, audit de site et référencement Google.",
     "project.seo.short": "Site web SEO avec analyse de mots-clés et référencement.",
@@ -149,7 +149,7 @@ const translations = {
     "project.rail.short": "Design d'app transport avec UI intuitive.",
     // Music
     "music.title": "Ma Playlist",
-    "music.description": "La musique fait partie de ma vie. Cette playlist reflète mon ambiance — un mélange de hip-hop, rap et beats chill qui me gardent concentré.",
+    "music.description": "La musique fait partie de ma vie. Cette playlist reflète mon ambiance — un mélange de hip-hop, rap et sons calmes qui me gardent concentré.",
     // Contact
     "contact.title": "Me Contacter",
     "contact.name": "Nom",
